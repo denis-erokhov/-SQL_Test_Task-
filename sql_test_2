@@ -1,0 +1,55 @@
+-- Создание таблицы Flights
+
+CREATE TABLE Flights (
+    Id INT PRIMARY KEY,
+    Start VARCHAR(255),
+    End VARCHAR(255),
+    Tickets BOOLEAN
+);
+
+-- Внесение данных в таблицу Flights
+
+INSERT INTO Flights (Id, Start, End, Tickets)
+VALUES
+    (1, 'Ekaterinburg', 'Moscow', TRUE),
+    (2, 'Saint-Petersburg', 'Ekaterinburg', FALSE),
+    (3, 'Vladivostok', 'Kaliningrad', TRUE),
+    (4, 'Ekaterinburg', 'Moscow', TRUE),
+    (5, 'Ekaterinburg', 'Saint-Petersburg', FALSE),
+    (6, 'Samara', 'Moscow', TRUE),
+    (7, 'Ekaterinburg', 'Kaliningrad', FALSE),
+    (8, 'Moscow', 'Ekaterinburg', TRUE),
+    (9, 'Samara', 'Saint-Petersburg', FALSE),
+    (10, 'Ekaterinburg', 'Vladivostok', TRUE);
+
+-- Создание таблицы Duration
+
+CREATE TABLE Duration (
+    Id INT PRIMARY KEY,
+    Duration_min INT
+);
+
+-- Внесение данных в таблицу Duration
+
+INSERT INTO Duration (Id, Duration_min)
+VALUES
+    (1, 120),
+    (2, 150),
+    (3, 540),
+    (4, 125),
+    (5, 150),
+    (6, 100),
+    (7, 180),
+    (8, 120),
+    (9, 110),
+    (10, 480);
+
+-- Создание запроса
+
+SELECT*
+FROM Flights
+JOIN Duration ON Flights.Id = Duration.Id
+WHERE Flights.Start = 'Ekaterinburg'
+AND Flights.Tickets = TRUE
+AND Duration.Duration_min <= 180
+ORDER BY Duration.Duration_min ASC;
