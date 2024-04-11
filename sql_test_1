@@ -1,0 +1,30 @@
+CREATE database HomeWork;
+USE HomeWork;
+-- Создание таблицы Meals
+CREATE TABLE Meals (
+    MealID INT PRIMARY KEY,
+    MealName VARCHAR(255),
+    Price INT,
+    DrinkID INT,
+    FOREIGN KEY (DrinkID) REFERENCES Drinks(DrinkID)
+);
+INSERT INTO Meals VALUES(1, "Omlet", 120, 1);
+INSERT INTO Meals VALUES(2, "Fried Egg", 70, 4);
+INSERT INTO Meals VALUES(3, "Sausage", 90, 3);
+-- Смотрю на результат внесения данных
+SELECT* FROM Meals;
+-- Создание таблицы Drinks
+CREATE TABLE Drinks (
+    DrinkID INT PRIMARY KEY,
+    DrinkName VARCHAR(255)
+);
+INSERT INTO Drinks VALUES(1,"Orange Juice");
+INSERT INTO Drinks VALUES(2,"Tea");
+INSERT INTO Drinks VALUES(3,"Coffee");
+INSERT INTO Drinks VALUES(4,"Milkshake");
+SELECT* FROM Drinks;
+-- Требуемый запрос 
+SELECT Meals.MealID, Meals.MealName, Meals.Price, Drinks.DrinkName
+FROM Meals
+INNER JOIN Drinks ON Meals.DrinkID = Drinks.DrinkID
+WHERE Meals.Price >= 90;
